@@ -104,10 +104,6 @@ class SlavePresenter constructor(slaveView: SlaveMvp.View,
                 view?.setControl(receivedControl)
             }
         }
-//        val receivedData = bytes?.toBooleanArray()
-
-//        receivedData?.forEach { Timber.d(it.toString()) }
-
     }
 
     override fun resetDisplay() {
@@ -144,12 +140,10 @@ class SlavePresenter constructor(slaveView: SlaveMvp.View,
 
     override fun updateXY(x: Int, y: Int, lit: Boolean) {
 
-        val xInvert = y
-        val yInvert = x
-        val displayRow = Math.floor(xInvert / 8.0).toInt()
-        val displayColumn = Math.floor(yInvert / 8.0).toInt()
+        val displayRow = Math.floor(y / 8.0).toInt()
+        val displayColumn = Math.floor(x / 8.0).toInt()
 
-        ledControl.setLed(displayColumn + (displayRow * 4), 7 - (xInvert % 8), 7 - (yInvert % 8), lit)
+        ledControl.setLed(displayColumn + (displayRow * 4), 7 - (y % 8), 7 - (x % 8), lit)
 
     }
 
