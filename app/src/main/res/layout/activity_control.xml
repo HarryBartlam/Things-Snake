@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.control.ControlActivity">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/control_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/control_toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--android:theme="@style/ToolbarTheme"-->
+    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:id="@+id/control_status_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                tools:text="Control Status" />
+
+            <ProgressBar
+                android:id="@+id/control_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/up"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:text="up" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <Button
+                        android:id="@+id/left"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:text="left" />
+
+                    <Button
+                        android:id="@+id/right"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:text="right" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/down"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:text="down" />
+
+
+                <Button
+                    android:id="@+id/start"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Start" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

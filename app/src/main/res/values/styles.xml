@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="Theme.SnakeControl" parent="Base.Theme.SnakeControl">
+    </style>
+
+    <style name="Base.Theme.SnakeControl" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar" />
+
+
+</resources>

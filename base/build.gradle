@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTools)
+
+    defaultConfig {
+        minSdkVersion(minSdk)
+        targetSdkVersion(targetSdk)
+    }
+
+    buildTypes {
+        debug {}
+        release {}
+    }
+
+    flavorDimensions defaultDimen
+
+    productFlavors {
+        standard {
+            dimension defaultDimen
+            buildConfigField "String", "CLIENT_ID", "\"f2ce70df5903c656fab4cad50de962148cbb3b855fe8676355d20ff198f74cb8\""
+            buildConfigField "String", "CLIENT_SECRET", "\"aff2d7d80ae320eeb83f1259f177d236b86bf20fa5aba9a3850646d43238be18\""
+        }
+    }
+}
+
+apply from: '../ktlint.gradle'
+
+exposedLib(kotlin)
+exposedLib(rxjava)
+exposedLib(timber)
+exposedLib(rxpref)
+
+internalLib(gson)
+
+dependencies {
+
+}

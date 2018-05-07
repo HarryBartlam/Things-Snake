@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="25dp"
+    android:layout_height="25dp"
+    android:background="#000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/matix_dot"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/dot" />
+
+</LinearLayout>

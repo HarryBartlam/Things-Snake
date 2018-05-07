@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTools)
+
+    defaultConfig {
+        minSdkVersion(minSdk)
+        targetSdkVersion(targetSdk)
+    }
+
+    buildTypes {
+        debug {}
+        release {}
+    }
+
+    flavorDimensions defaultDimen
+
+    productFlavors {
+        standard {
+            dimension defaultDimen
+        }
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+apply from: '../ktlint.gradle'
+
+exposedProject('base')
+
+internalLib(okhttp)
+internalLib(gson)
+internalLib(retrofit)
+exposedLib(googleNearby)
+exposedLib(recyclerview)
+
+
+dependencies {
+
+}

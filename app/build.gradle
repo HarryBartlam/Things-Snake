@@ -1,0 +1,192 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTools)
+
+    defaultConfig {
+        applicationId "com.simplyapp.control"
+        minSdkVersion(minSdk)
+        targetSdkVersion(targetSdk)
+
+        versionName '1'
+        versionCode 1
+        manifestPlaceholders = [appName: "Things Connect (Control)"]
+
+        multiDexEnabled false
+
+        buildConfigField "int", "TEST_VERSION", "25"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility 1.7
+        targetCompatibility 1.7
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("release.jks")
+            storePassword "STORE_PASSWORD"
+            keyAlias "STORE_ALIAS"
+            keyPassword "ALIAS_PASSWORD"
+        }
+        debug {
+            storeFile file("debug.keystore")
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            manifestPlaceholders = [appNameSuffix: ""]
+            signingConfig signingConfigs.release
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles '../proguard/butterknife.pro'
+            proguardFiles '../proguard/calligraphy.pro'
+            proguardFiles '../proguard/dagger.pro'
+            proguardFiles '../proguard/glide.pro'
+            proguardFiles '../proguard/google-analytics.pro'
+            proguardFiles '../proguard/gson.pro'
+            proguardFiles '../proguard/hockey.pro'
+            proguardFiles '../proguard/jodatime.pro'
+            proguardFiles '../proguard/jodatime-android.pro'
+            proguardFiles '../proguard/kotlin.pro'
+            proguardFiles '../proguard/lifecycle.pro'
+            proguardFiles '../proguard/okhttp.pro'
+            proguardFiles '../proguard/okhttp3.pro'
+            proguardFiles '../proguard/okio.pro'
+            proguardFiles '../proguard/play-services.pro'
+            proguardFiles '../proguard/retrofit.pro'
+            proguardFiles '../proguard/retrofit2.pro'
+            proguardFiles '../proguard/rxjava.pro'
+            proguardFiles '../proguard/sqlite.pro'
+            proguardFiles '../proguard/support-design.pro'
+            proguardFiles '../proguard/support-v7-appcompat.pro'
+            proguardFiles '../proguard/support-v7-cardview.pro'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [appNameSuffix: " - Dev"]
+            applicationIdSuffix ".debug"
+            versionNameSuffix "dev"
+            signingConfig signingConfigs.debug
+
+            buildConfigField "boolean", "DEV", "true"
+        }
+
+        qa {
+            matchingFallbacks = ['debug']
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [appNameSuffix: " - QA"]
+            applicationIdSuffix ".qa"
+            versionNameSuffix "qa"
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    flavorDimensions defaultDimen
+
+    productFlavors {
+        standard {
+            dimension defaultDimen
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+        unitTests.all {
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen { false }
+                showStandardStreams = true
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    sourceSets {
+        test {
+            java.srcDirs += "$projectDir/src/sharedTest/java"
+        }
+
+        androidTest {
+            java.srcDirs += "$projectDir/src/sharedTest/java"
+        }
+    }
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.guava:guava:22.0'
+    }
+}
+
+apply from: '../ktlint.gradle'
+
+task assembly {
+    dependsOn ('assembleDebug', 'assembleRelease')
+}
+task tests {
+    dependsOn ('testStandardDebugUnitTest', 'testStandardReleaseUnitTest')
+    finalizedBy assembly
+}
+task lints {
+    dependsOn ('ktlint', 'lintStandardRelease')
+    finalizedBy tests
+}
+task testBuild {
+    dependsOn clean
+    finalizedBy lints
+}
+internalProject('data')
+
+internalLib(rxbinding)
+internalLib(googleNearby)
+internalLib(supportv4)
+internalLib(appcompatv7)
+internalLib(design)
+internalLib(rxlifecycle)
+internalLib(threetenabp)
+internalLib(retrofit)
+internalLib(kperm)
+
+test(unittest.junit)
+test(unittest.hamcrest)
+test(unittest.mockito)
+test(unittest.robolectric)
+test(unittest.commons)
+
+androidTest(uitest.findbugs)
+androidTest(uitest.espresso)
+androidTest(uitest.junit)
+androidTest(uitest.mockito)
+androidTest(uitest.dexmaker)
+
+dependencies {
+}

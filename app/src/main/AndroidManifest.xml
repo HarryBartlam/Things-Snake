@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.simplyapp.control">
+
+    <application
+        android:name="com.simplyapp.control.ControlApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="${appName}${appNameSuffix}"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SnakeControl">
+        <activity
+            android:name="com.simplyapp.control.ui.connect.ConnectActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.control.ControlActivity"
+            android:screenOrientation="landscape" />
+    </application>
+
+</manifest>

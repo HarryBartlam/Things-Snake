@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion(compileSdk)
+    buildToolsVersion(buildTools)
+
+    defaultConfig {
+        minSdkVersion(minSdk)
+        targetSdkVersion(targetSdk)
+    }
+
+    buildTypes {
+        debug {}
+        release {}
+    }
+
+    flavorDimensions defaultDimen
+
+    productFlavors {
+        standard {
+            dimension defaultDimen
+        }
+    }
+
+}
+
+apply from: '../ktlint.gradle'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+exposedLib(kotlin)
+exposedLib(rxbinding)
+internalLib(androidthings)

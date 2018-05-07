@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Template App</string>
+
+    <string name="connect_title">Connect</string>
+    <string name="connect_permission">Permission is needed</string>
+
+    <string name="control_title">Control</string>
+</resources>

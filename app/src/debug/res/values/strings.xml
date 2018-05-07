@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="debug_drawer_header_scalpel">SCALPEL</string>
+    <string name="debug_drawer_switch_scalpel">Enable Scalpel</string>
+    <string name="debug_drawer_switch_scalpel_id">Show Ids</string>
+    <string name="debug_drawer_switch_scalpel_graphics">Enable Graphics</string>
+</resources>
