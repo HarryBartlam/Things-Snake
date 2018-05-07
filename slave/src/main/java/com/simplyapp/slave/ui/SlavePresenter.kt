@@ -2,6 +2,7 @@ package com.simplyapp.slave.ui
 
 import android.content.Context
 import com.google.android.gms.nearby.Nearby
+import com.google.android.gms.nearby.connection.AdvertisingOptions
 import com.google.android.gms.nearby.connection.ConnectionInfo
 import com.google.android.gms.nearby.connection.ConnectionLifecycleCallback
 import com.google.android.gms.nearby.connection.ConnectionResolution
@@ -9,6 +10,7 @@ import com.google.android.gms.nearby.connection.ConnectionsStatusCodes
 import com.google.android.gms.nearby.connection.Payload
 import com.google.android.gms.nearby.connection.PayloadCallback
 import com.google.android.gms.nearby.connection.PayloadTransferUpdate
+import com.google.android.gms.nearby.connection.Strategy
 import com.simplyapp.control.arch.AppModule
 import com.simplyapp.control.arch.BasePresenter
 import com.simplyapp.control.util.androidExt.applyIoSchedulers
@@ -26,7 +28,6 @@ class SlavePresenter constructor(slaveView: SlaveMvp.View,
     val displayNum = 16
 
     val ledControl = MAX72xxLEDController("SPI0.0", displayNum)
-
 
     private val connectionLifecycleCallback = object : ConnectionLifecycleCallback() {
         override fun onConnectionInitiated(endpointId: String, connectionInfo: ConnectionInfo) {
@@ -59,20 +60,20 @@ class SlavePresenter constructor(slaveView: SlaveMvp.View,
 
     override fun onCreate() {
         setupDisplay()
-//        Nearby.getConnectionsClient(context)
-//                .startAdvertising(
-//                        /* endpointName= */ "Android Snek",
-//                        /* serviceId= */ "com.simplyapp.com.slave",
-//                        connectionLifecycleCallback,
-//                        AdvertisingOptions(Strategy.P2P_CLUSTER))
-//                .addOnSuccessListener {
-//                    view?.setStatus("Successfully Advertising")
-//                    Timber.d("Successfully Advertising")
-//                }
-//                .addOnFailureListener {
-//                    view?.setStatus("Failed to Advertised")
-//                    Timber.e(it, "Failed to Advertised")
-//                }
+        Nearby.getConnectionsClient(context)
+                .startAdvertising(
+                        /* endpointName= */ "Android Snek",
+                        /* serviceId= */ "com.simplyapp.com.slave",
+                        connectionLifecycleCallback,
+                        AdvertisingOptions(Strategy.P2P_CLUSTER))
+                .addOnSuccessListener {
+                    view?.setStatus("Successfully Advertising")
+                    Timber.d("Successfully Advertising")
+                }
+                .addOnFailureListener {
+                    view?.setStatus("Failed to Advertised")
+                    Timber.e(it, "Failed to Advertised")
+                }
         Flowable.interval(5, TimeUnit.SECONDS)
                 .applyIoSchedulers()
                 .subscribe {
