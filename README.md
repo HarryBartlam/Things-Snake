@@ -1,9 +1,10 @@
 # Things Snake  
 An **Android Things** project to play snake on a custom display, and allow control by another Android device using **Google Nearby**.  
  
-Control App		|	Snake Things App
+Snake Things App		|	Control App
 :-------------------------:|:-------------------------:
-<img src="https://i.imgur.com/qpKEHTc.png" height="400" alt="Gif Showing demo of the app"/> | <img src="https://i.imgur.com/Q0IyC0Q.gif" height="400" alt="Gif Showing demo of the app"/>
+<img src="https://i.imgur.com/QhG5m7v.gif" height="400" alt="Gif Showing demo of the app"/> | <img src="https://i.imgur.com/qpKEHTc.png" height="400" alt="Gif Showing demo of the app"/> 
+
 The Snake game can either be controlled by a USB keyboard or the control app, Once the control app has started simple connect to the Things device from the available devices
 
 
@@ -19,7 +20,7 @@ The display for this project is made up of 16 MAX7219 displays, which came in se
   
   
 I loosely fitted these together   
-<img src="https://i.imgur.com/3cbGhnF.gif" height="250" alt="MAX7219 display together"/>  
+<img src="https://i.imgur.com/LojTTdH.gif" height="250" alt="MAX7219 display together"/>  
   
   
 Then I soldered the displays together  
@@ -29,6 +30,7 @@ And finally I designed (in AutoCad inventor) and 3d printed the case to hold all
 <img src="https://i.imgur.com/pbDncAX.gif" height="250" alt="3d printing display case"/>  
  
 The finished display
+
 <img src="https://i.imgur.com/jatydKh.jpg" height="300" alt="MAX7219 display finished"/>  
 
 Control of the display has been done by modifying a library found [here](https://github.com/Nilhcem/ledcontrol-androidthings).  This was needed due to the display limit of this library, see implemented code [here](https://github.com/offbow/Things-Snake/blob/master/max72xx/src/main/java/com/simplyapp/max72xx/driver/MAX72xxLEDController.java)
